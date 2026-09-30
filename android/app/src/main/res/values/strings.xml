@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Tarea3 React</string>
+    <string name="title_activity_main">Tarea3 React</string>
+    <string name="package_name">com.yordanni.tarea3</string>
+    <string name="custom_url_scheme">com.yordanni.tarea3</string>
+</resources>

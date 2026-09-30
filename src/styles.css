@@ -1,0 +1,419 @@
+/* =========================================================
+   Tema Material 3 (Google) con el azul institucional del ITLA
+   Todos los colores viven aquí como variables: si cambias
+   --primario, cambia toda la app.
+   ========================================================= */
+:root {
+  --primario: #023877;             /* Azul ITLA */
+  --primario-claro: #1f5bb5;       /* Para degradados */
+  --sobre-primario: #ffffff;
+  --contenedor-primario: #d7e3ff;  /* Tono suave del azul (Material "primary container") */
+  --sobre-contenedor-primario: #001b3f;
+  --contenedor-secundario: #dde3f5;
+  --acento: #e52229;               /* Rojo ITLA, usado con moderación */
+
+  --superficie: #f8f9ff;
+  --superficie-baja: #f1f3fb;
+  --superficie-media: #e9edf7;
+  --sobre-superficie: #191c21;
+  --sobre-superficie-variante: #43474f;
+  --contorno: #73777f;
+  --contorno-suave: #c3c6d0;
+  --error: #ba1a1a;
+
+  /* Formas redondeadas grandes: sello de Material 3 Expressive */
+  --radio-s: 12px;
+  --radio-m: 20px;
+  --radio-l: 28px;
+  --radio-pildora: 999px;
+
+  /* Curva de movimiento "resorte" de Material 3 */
+  --curva: cubic-bezier(0.2, 0, 0, 1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Roboto Flex", Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--superficie);
+  color: var(--sobre-superficie);
+  -webkit-tap-highlight-color: transparent;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ---------------- Layout ---------------- */
+.layout { display: flex; min-height: 100vh; }
+
+.contenido {
+  flex: 1;
+  padding: 32px;
+  min-width: 0;
+}
+
+/* ---------------- Barra superior (solo celular) ---------------- */
+.barra-superior {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  align-items: center;
+  gap: 8px;
+  padding: calc(8px + env(safe-area-inset-top)) 8px 8px;
+  background: var(--primario);
+  color: var(--sobre-primario);
+}
+
+.barra-titulo { font-size: 1.25rem; font-weight: 500; }
+
+.boton-icono {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: var(--radio-pildora);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.boton-icono:active { background: rgba(255, 255, 255, 0.16); }
+
+/* ---------------- Menú lateral (Navigation Drawer) ---------------- */
+.drawer {
+  width: 280px;
+  flex-shrink: 0;
+  padding: 12px;
+  background: var(--superficie-baja);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.drawer-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 12px 20px;
+}
+
+.marca-logo {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--primario);
+  color: white;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  border-bottom: 4px solid var(--acento);
+}
+
+.marca-titulo { margin: 0; font-weight: 700; font-size: 1.1rem; }
+.marca-sub { margin: 2px 0 0; font-size: 0.8rem; color: var(--sobre-superficie-variante); }
+
+.drawer-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 56px;
+  padding: 0 16px;
+  border-radius: var(--radio-pildora);   /* indicador en forma de píldora */
+  color: var(--sobre-superficie-variante);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s var(--curva);
+}
+.drawer-item:hover { background: var(--superficie-media); }
+.drawer-item.activo {
+  background: var(--contenedor-primario);
+  color: var(--sobre-contenedor-primario);
+  font-weight: 700;
+}
+
+.velo { display: none; }
+
+/* ---------------- Inicio: tarjeta de perfil ---------------- */
+.inicio { max-width: 760px; margin: 0 auto; }
+
+.perfil {
+  background: white;
+  border-radius: var(--radio-l);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.perfil-banner {
+  height: 120px;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.18) 0 60px, transparent 61px),
+    radial-gradient(circle at 10% 110%, rgba(255, 255, 255, 0.12) 0 80px, transparent 81px),
+    linear-gradient(135deg, var(--primario), var(--primario-claro));
+}
+
+.perfil-cuerpo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px 24px;
+}
+
+.avatar {
+  width: 128px;
+  height: 128px;
+  margin-top: -64px;          /* la foto "sube" y se monta sobre el banner */
+  border-radius: 36px;        /* forma cuadrada suave, estilo Expressive */
+  object-fit: cover;
+  border: 5px solid white;
+  background: var(--contenedor-primario);
+  box-shadow: 0 4px 14px rgba(2, 56, 119, 0.25);
+}
+
+.avatar-iniciales {
+  display: grid;
+  place-items: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--primario);
+}
+
+.perfil-nombre {
+  margin: 16px 0 12px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--radio-s);
+  border: 1px solid var(--contorno-suave);
+  font-size: 0.9rem;
+  color: var(--sobre-superficie-variante);
+  text-decoration: none;
+  max-width: 100%;
+}
+
+.chip-accion {
+  background: var(--contenedor-secundario);
+  border-color: transparent;
+  color: var(--sobre-contenedor-primario);
+}
+
+.perfil-carrera {
+  margin: 16px 0 0;
+  line-height: 1.4;
+  color: var(--primario);
+  font-weight: 600;
+}
+
+/* ---------------- Inicio: botones de acceso ---------------- */
+.seccion-titulo {
+  margin: 28px 4px 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.accesos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* 4 botones en una fila, mismo ancho */
+  gap: 12px;
+}
+
+.acceso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 6px 14px;
+  border-radius: var(--radio-m);
+  background: white;
+  color: var(--sobre-superficie);
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s var(--curva), box-shadow 0.25s var(--curva);
+}
+
+.acceso-icono {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  background: var(--contenedor-primario);
+  color: var(--primario);
+  /* "Shape morphing": al tocar, la forma cambia de cuadrado suave a círculo */
+  transition: border-radius 0.35s var(--curva), background 0.25s var(--curva), color 0.25s var(--curva);
+}
+
+.acceso-texto { font-size: 0.85rem; font-weight: 600; }
+
+.acceso:hover { box-shadow: 0 6px 16px rgba(2, 56, 119, 0.15); transform: translateY(-2px); }
+.acceso:hover .acceso-icono,
+.acceso:active .acceso-icono {
+  border-radius: 50%;
+  background: var(--primario);
+  color: white;
+}
+.acceso:active { transform: scale(0.95); }
+
+/* ---------------- Páginas: tarjeta, formularios, resultados ---------------- */
+.tarjeta {
+  background: white;
+  border-radius: var(--radio-l);
+  padding: 28px;
+  max-width: 760px;
+  margin: 0 auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.tarjeta h1 { margin-top: 0; font-size: 1.6rem; color: var(--primario); }
+
+.formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.formulario input {
+  flex: 1;
+  min-width: 140px;
+  height: 56px;
+  padding: 0 16px;
+  border: 1px solid var(--contorno);
+  border-radius: var(--radio-s);
+  font-size: 1rem;
+  font-family: inherit;
+  background: white;
+  color: var(--sobre-superficie);
+}
+.formulario input:focus {
+  outline: none;
+  border: 2px solid var(--primario);
+  padding: 0 15px;
+}
+
+.formulario button {
+  height: 56px;
+  padding: 0 28px;
+  border: none;
+  border-radius: var(--radio-pildora);
+  background: var(--primario);
+  color: var(--sobre-primario);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-radius 0.3s var(--curva), filter 0.2s;
+}
+.formulario button:hover { filter: brightness(1.15); }
+.formulario button:active { border-radius: var(--radio-s); }  /* morphing al presionar */
+
+.signo { font-size: 1.5rem; font-weight: 700; color: var(--primario); }
+
+.resultado {
+  margin-top: 20px;
+  font-size: 1.25rem;
+  background: var(--contenedor-primario);
+  color: var(--sobre-contenedor-primario);
+  padding: 18px 20px;
+  border-radius: var(--radio-m);
+}
+
+.error { color: var(--error); margin-top: 16px; font-weight: 500; }
+
+/* ---------------- Tabla de multiplicar ---------------- */
+.tabla {
+  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 1.1rem;
+  width: 100%;
+  max-width: 360px;
+}
+.tabla td { padding: 8px 10px; text-align: center; }
+.tabla tr:nth-child(odd) td { background: var(--superficie-baja); }
+.tabla tr td:first-child { border-radius: var(--radio-s) 0 0 var(--radio-s); }
+.tabla tr td:last-child { border-radius: 0 var(--radio-s) var(--radio-s) 0; color: var(--primario); }
+
+/* ---------------- Video ---------------- */
+.video { position: relative; padding-top: 56.25%; margin-top: 16px; }
+.video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: var(--radio-m);
+}
+
+.enlace-video {
+  display: inline-flex;
+  margin-top: 16px;
+  padding: 10px 20px;
+  border-radius: var(--radio-pildora);
+  background: var(--contenedor-primario);
+  color: var(--sobre-contenedor-primario);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* =========================================================
+   Celular: barra superior + menú que se desliza desde la izquierda
+   ========================================================= */
+@media (max-width: 768px) {
+  .layout { flex-direction: column; }
+  .barra-superior { display: flex; }
+  .contenido { padding: 16px; }
+
+  .drawer {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    width: min(300px, 85vw);
+    padding-top: calc(12px + env(safe-area-inset-top));
+    border-radius: 0 var(--radio-l) var(--radio-l) 0;
+    transform: translateX(-100%);            /* escondido fuera de la pantalla */
+    transition: transform 0.35s var(--curva);
+  }
+  .drawer.abierto { transform: translateX(0); }  /* entra deslizándose */
+
+  .velo {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.32);
+    opacity: 0;
+    pointer-events: none;                     /* invisible: no bloquea toques */
+    transition: opacity 0.3s var(--curva);
+  }
+  .velo.visible { opacity: 1; pointer-events: auto; }
+
+  .tarjeta { padding: 20px; }
+  .perfil-nombre { font-size: 1.5rem; }
+  .accesos { gap: 8px; }
+  .acceso { padding: 14px 4px 12px; }
+  .acceso-icono { width: 52px; height: 52px; border-radius: 18px; }
+  .acceso-texto { font-size: 0.78rem; }
+}
+
+/* El ícono va en línea con el texto, así el texto se centra bien aunque salte de línea */
+.perfil-carrera svg { vertical-align: -3px; margin-right: 4px; }
